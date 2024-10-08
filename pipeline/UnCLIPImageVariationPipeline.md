@@ -14,11 +14,11 @@ import mindspore as ms
 from mindone.diffusers import UnCLIPImageVariationPipeline
 from PIL import Image
 
-pipe = UnCLIPImageVariationPipeline.from_pretrained("kakaobrain/karlo-v1-alpha", mindspore_type=ms.float16)
+pipe = UnCLIPImageVariationPipeline.from_pretrained("kakaobrain/karlo-v1-alpha-image-variations", mindspore_type=ms.float16)
 
-prompt = "a high-resolution photograph of a big red frog on a green leaf"
-image = pipe([prompt]).image[0]
-image
+image = Image.open("./frog.png")
+image = pipe(image)[0][0]
+image.save(./frog-variation.png)
 
 
 ```
