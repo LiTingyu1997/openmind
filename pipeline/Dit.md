@@ -14,24 +14,25 @@ The original codebase can be found at [facebookresearch/dit](https://github.com/
 ## How to use
 
 ```pycon
-    from mindone.diffusers import DiTPipeline, DPMSolverMultistepScheduler
-    import mindspore as ms
+from mindone.diffusers import DiTPipeline, DPMSolverMultistepScheduler
+import mindspore as ms
 
-    import numpy as np
+import numpy as np
 
-    pipe = DiTPipeline.from_pretrained("facebook/DiT-XL-2-256", mindspore_dtype=ms.float16)
-    pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+pipe = DiTPipeline.from_pretrained("facebook/DiT-XL-2-256", mindspore_dtype=ms.float16)
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
 
-    # pick words from Imagenet class labels
-    pipe.labels  # to print all available words
+# pick words from Imagenet class labels
+pipe.labels  # to print all available words
 
-    # pick words that exist in ImageNet
-    words = ["white shark", "umbrella"]
+# pick words that exist in ImageNet
+words = ["white shark", "umbrella"]
 
-    class_ids = pipe.get_label_ids(words)
+class_ids = pipe.get_label_ids(words)
 
-    generator = np.random.default_rng(33)
-    output = pipe(class_labels=class_ids, num_inference_steps=25, generator=generator)
+generator = np.random.default_rng(33)
+output = pipe(class_labels=class_ids, num_inference_steps=25, generator=generator)
 
-    image = output[0][0]  # label 'white shark'
+image = output[0][0]  # label 'white shark'
 ```
+![alt text](<image (30).jpeg>)
