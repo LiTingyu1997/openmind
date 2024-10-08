@@ -1,5 +1,15 @@
-# Stable Diffusion XL
-## Overview
+# InstructPix2Pix
+
+[InstructPix2Pix: Learning to Follow Image Editing Instructions](https://huggingface.co/papers/2211.09800) is by Tim Brooks, Aleksander Holynski and Alexei A. Efros.
+
+The abstract from the paper is:
+
+*We propose a method for editing images from human instructions: given an input image and a written instruction that tells the model what to do, our model follows these instructions to edit the image. To obtain training data for this problem, we combine the knowledge of two large pretrained models -- a language model (GPT-3) and a text-to-image model (Stable Diffusion) -- to generate a large dataset of image editing examples. Our conditional diffusion model, InstructPix2Pix, is trained on our generated data, and generalizes to real images and user-written instructions at inference time. Since it performs edits in the forward pass and does not require per example fine-tuning or inversion, our model edits images quickly, in a matter of seconds. We show compelling editing results for a diverse collection of input images and written instructions.*
+
+You can find additional information about InstructPix2Pix on the [project page](https://www.timothybrooks.com/instruct-pix2pix), [original codebase](https://github.com/timothybrooks/instruct-pix2pix), and try it out in a [demo](https://huggingface.co/spaces/timbrooks/instruct-pix2pix).
+
+
+## Stable Diffusion XL Instruct Pix-to-pix
 Stable Diffusion XL (SDXL) was proposed in [SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis](https://huggingface.co/papers/2307.01952) by Dustin Podell, Zion English, Kyle Lacey, Andreas Blattmann, Tim Dockhorn, Jonas Müller, Joe Penna, and Robin Rombach.
 
 The abstract from the paper is:
@@ -10,28 +20,29 @@ The abstract from the paper is:
 ## How to use
 
 ```pycon
-    import mindspore as ms
-    from mindone.diffusers import StableDiffusionXLInstructPix2PixPipeline
-    from mindone.diffusers.utils import load_image
+import mindspore as ms
+from mindone.diffusers import StableDiffusionXLInstructPix2PixPipeline
+from mindone.diffusers.utils import load_image
 
-    resolution = 768
-    image = load_image(
-        "https://hf.co/datasets/diffusers/diffusers-images-docs/resolve/main/mountain.png"
-    ).resize((resolution, resolution))
-    edit_instruction = "Turn sky into a cloudy one"
+resolution = 768
+image = load_image(
+    "https://hf.co/datasets/diffusers/diffusers-images-docs/resolve/main/mountain.png"
+).resize((resolution, resolution))
+edit_instruction = "Turn sky into a cloudy one"
 
-    pipe = StableDiffusionXLInstructPix2PixPipeline.from_pretrained(
-        "diffusers/sdxl-instructpix2pix-768", mindspore_dtype=ms.float16
-    )
+pipe = StableDiffusionXLInstructPix2PixPipeline.from_pretrained(
+    "diffusers/sdxl-instructpix2pix-768", mindspore_dtype=ms.float16
+)
 
-    edited_image = pipe(
-        prompt=edit_instruction,
-        image=image,
-        height=resolution,
-        width=resolution,
-        guidance_scale=3.0,
-        image_guidance_scale=1.5,
-        num_inference_steps=30,
-    )[0][0]
-    edited_image
+edited_image = pipe(
+    prompt=edit_instruction,
+    image=image,
+    height=resolution,
+    width=resolution,
+    guidance_scale=3.0,
+    image_guidance_scale=1.5,
+    num_inference_steps=30,
+)[0][0]
+edited_image
 ```
+![alt text](<image (29).jpeg>)

@@ -1,4 +1,4 @@
-# Latent Diffusion 
+# Latent Diffusion Text-to-image
 ## Overview
 Latent Diffusion was proposed in [High-Resolution Image Synthesis with Latent Diffusion Models](https://huggingface.co/papers/2112.10752) by Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Björn Ommer.
 
@@ -25,3 +25,4 @@ images = ldm([prompt], num_inference_steps=50, eta=0.3, guidance_scale=6)[0]
 for idx, image in enumerate(images):
     image.save(f"squirrel-{idx}.png")
 ```
+![alt text](<image (32).jpeg>)

@@ -1,4 +1,4 @@
-# Kandinsky3
+# Kandinsky3 Image-to-image
 ## Overview
 Kandinsky 3 is created by [Vladimir Arkhipkin](https://github.com/oriBetelgeuse),[Anastasia Maltseva](https://github.com/NastyaMittseva),[Igor Pavlov](https://github.com/boomb0om),[Andrei Filatov](https://github.com/anvilarth),[Arseniy Shakhmatov](https://github.com/cene555),[Andrey Kuznetsov](https://github.com/kuznetsoffandrey),[Denis Dimitrov](https://github.com/denndimitrov), [Zein Shaheen](https://github.com/zeinsh)
 
@@ -24,15 +24,16 @@ Check out the [Kandinsky Community](https://huggingface.co/kandinsky-community) 
 ## How to use
 
 ```pycon
-    from diffusers import Kandinsky3Pipeline
-    import mindspore as ms
-    import numpy as np
+from diffusers import Kandinsky3Pipeline
+import mindspore as ms
+import numpy as np
 
-    pipe = Kandinsky3Pipeline.from_pretrained("kandinsky-community/kandinsky-3", variant="fp16", mindspore_dtype=ms.float16)
+pipe = Kandinsky3Pipeline.from_pretrained("kandinsky-community/kandinsky-3", variant="fp16", mindspore_dtype=ms.float16)
 
-    prompt = "A photograph of the inside of a subway train. There are raccoons sitting on the seats.
-        One of them is reading a newspaper. The window shows the city in the background."
+prompt = "A photograph of the inside of a subway train. There are raccoons sitting on the seats.
+    One of them is reading a newspaper. The window shows the city in the background."
 
-    generator = np.random.Generator(np.random.PCG64(43))
-    image = pipe(prompt, num_inference_steps=25, generator=generator)[0][0]
+generator = np.random.Generator(np.random.PCG64(43))
+image = pipe(prompt, num_inference_steps=25, generator=generator)[0][0]
 ```
+![alt text](<image (20).jpeg>)

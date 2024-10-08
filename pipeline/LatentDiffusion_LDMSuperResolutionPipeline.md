@@ -1,4 +1,4 @@
-# Latent Diffusion 
+# Latent Diffusion LDMSuperResolutionPipeline
 ## Overview
 Latent Diffusion was proposed in [High-Resolution Image Synthesis with Latent Diffusion Models](https://huggingface.co/papers/2112.10752) by Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Björn Ommer.
 
@@ -12,25 +12,26 @@ The original codebase can be found at [CompVis/latent-diffusion](https://github.
 ## How to use
 
 ```pycon
-    import requests
-    from PIL import Image
-    from io import BytesIO
-    from mindone.diffusers import LDMSuperResolutionPipeline
-    import mindspore as ms
+import requests
+from PIL import Image
+from io import BytesIO
+from mindone.diffusers import LDMSuperResolutionPipeline
+import mindspore as ms
 
-    # load model and scheduler
-    pipeline = LDMSuperResolutionPipeline.from_pretrained("CompVis/ldm-super-resolution-4x-openimages")
+# load model and scheduler
+pipeline = LDMSuperResolutionPipeline.from_pretrained("CompVis/ldm-super-resolution-4x-openimages")
 
-    # let's download an  image
-    url = (
-        "https://user-images.githubusercontent.com/38061659/199705896-b48e17b8-b231-47cd-a270-4ffa5a93fa3e.png"
-    )
-    response = requests.get(url)
-    low_res_img = Image.open(BytesIO(response.content)).convert("RGB")
-    low_res_img = low_res_img.resize((128, 128))
+# let's download an  image
+url = (
+    "https://user-images.githubusercontent.com/38061659/199705896-b48e17b8-b231-47cd-a270-4ffa5a93fa3e.png"
+)
+response = requests.get(url)
+low_res_img = Image.open(BytesIO(response.content)).convert("RGB")
+low_res_img = low_res_img.resize((128, 128))
 
-    # run pipeline in inference (sample random noise and denoise)
-    upscaled_image = pipeline(low_res_img, num_inference_steps=100, eta=1)[0][0]
-    # save image
-    upscaled_image.save("ldm_generated_image.png")
+# run pipeline in inference (sample random noise and denoise)
+upscaled_image = pipeline(low_res_img, num_inference_steps=100, eta=1)[0][0]
+# save image
+upscaled_image.save("ldm_generated_image.png")
 ```
+![alt text](<image (31).jpeg>)
