@@ -17,7 +17,7 @@ pipe = UnCLIPPipeline.from_pretrained("kakaobrain/karlo-v1-alpha", mindspore_typ
 
 prompt = "a high-resolution photograph of a big red frog on a green leaf"
 image = pipe([prompt])[0][0]
-image.save(./frog.png)
+image.save("./frog.png")
 
 ```
 ![alt text](4C239D89-2E8C-43E4-9794-959BCCE80114.png)
