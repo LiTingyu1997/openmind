@@ -18,7 +18,5 @@ pipe = UnCLIPImageVariationPipeline.from_pretrained("kakaobrain/karlo-v1-alpha-i
 
 image = Image.open("./frog.png")
 image = pipe(image)[0][0]
-image.save(./frog-variation.png)
-
-
+image.save("./frog-variation.png")
 ```
