@@ -20,3 +20,4 @@ image = pipe([prompt])[0][0]
 image.save(./frog.png)
 
 ```
+![alt text](4C239D89-2E8C-43E4-9794-959BCCE80114.png)
